@@ -1,3 +1,10 @@
+= simple_form_for @event do |f|
+  = f.input :venue_name
+  = f.input :venue_address_line_one
+  = f.input :venue_address_line_two
+  = f.input :venue_address_city
+  = f.button :submit
+
 = simple_form_for [@event, VenuePhoto.new], html: { multipart: true } do |f|
   .visually--hidden
     = f.file_field :file, multiple: true, class: "js-uploader", data: { url: event_venue_photos_path(@event, @photo) }

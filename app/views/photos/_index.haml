@@ -3,9 +3,9 @@
     .js-justified
       - if @event.photos.empty?
         %p
-          It looks like no photos have not been uploaded yet.
+          Al parecer aún no se han subido fotos.
           %br
-          Come back here later to view the gallery
+          Vuelve en los próximos días para ver fotos de la ceremonia y la fiesta. O sube las tuyas!
 
       %a{href: "{{ photo.large }}", ng: { repeat: "photo in photos"}, data: { lightbox: "event" }}
         %img{ng: {src: "{{ photo.small }}"}}

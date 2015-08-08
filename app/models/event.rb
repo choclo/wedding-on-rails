@@ -15,7 +15,8 @@ class Event < ActiveRecord::Base
   end
 
   def formatted_time
-    date.strftime("%A #{date.day.ordinalize} %B %Y")
+    #date.strftime("%A #{date.day.ordinalize} %B %Y")
+    I18n.l(date, format: '%A %d %B %Y')
   end
 
   def show_rsvp?

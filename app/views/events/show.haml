@@ -9,7 +9,7 @@
         = @event.partner_two
 .row
   .column.small-12
-    %h5 Get married on
+    %h5 Se casan el
     %h3= @event.formatted_time
 
 #location.inverted.paralax{ :style => "background-image: url('#{@primary_venue_photo}');" }
@@ -19,15 +19,15 @@
       %br
       %br
 
-      %h2= "at the beautiful #{@event.venue_name}"
-      %h4= "in #{@event.venue_address_city}"
+      %h2= "en #{@event.venue_name}"
+      %h4= "en #{@event.venue_address_city}"
 
       %br
       %br
       %br
 
       - if @event.show_rsvp?
-        = link_to raw("<span class='icon icon-pencil'></span> RSVP now"), "#rsvp", class: "button large js-scroll-to"
+        = link_to raw("<span class='icon icon-pencil'></span> RSVP ahora"), "#rsvp", class: "button large js-scroll-to"
 
 - if @event.show_rsvp?
   %br
@@ -36,10 +36,10 @@
     .column.small-12
       %h5 RSVP
       = simple_form_for rsvp_event_groups_path(@event) do |f|
-        %h3 Step one - enter your name
+        %h3 Primer paso - ingresa tu nombre
         .row
           .column.small-12.column.medium-6.medium-offset-3
-            = f.input :guest, collection: @groups, as: :select, placeholder: "Select your name(s)"
+            = f.input :guest, collection: @groups, as: :select, placeholder: "Selecciona tu nombre(s)"
         %br
 
       .row
@@ -48,20 +48,20 @@
             %h3 {{ guestName(guest) }}
             %input{type: "text", placeholder: "enter guest name", ng: { show: "guest.is_guest", model: "newGuest.name" }}
             %p {{ rsvpStatus(guest) }}
-            %span.button{ng: { show: "guest.rsvp == null && !guest.is_guest", click: "setRsvp(guest, false)"}} Sorry I can not attend
+            %span.button{ng: { show: "guest.rsvp == null && !guest.is_guest", click: "setRsvp(guest, false)"}} Lo siento, no puedo asistir
             %span.button{ng: { hide: "guest.is_guest || guest.rsvp", click: "setRsvp(guest, true)"}} {{ rsvpButtonText(guest) }}
-            %span.button{ng: { show: "guest.rsvp", click: "setRsvp(guest, false)"}} Sorry I can no longer make it
+            %span.button{ng: { show: "guest.rsvp", click: "setRsvp(guest, false)"}} Lo siento ya no puedo asistir
             %span.button{ng: { show: "guest.is_guest", disabled: "newGuest.name == ''", click: "defineGuest(guest)"}} {{ rsvpButtonText(guest) }}
 
             .reset{ng: {show: "guest.rsvp && guest.invited_to_ceremony"}}
               %label
                 %input{type: "checkbox", ng: {change: "toggleVegetarian(guest)", model: "guest.vegetarian"}}
-                Vegetarian
+                Vegetariano
 
 .box.box--mint
   .row
     .column.small-12
-      %h5 Venue
+      %h5 Lugar
 
   .row-fluid.overflow
     %ul.small-block-grid-3
@@ -74,8 +74,11 @@
         %h3= @event.venue_name
         = raw(@event.venue_body.from_markdown_to_html)
         %br
-        %h4 Directions
+        %h4 Como llegar
         = raw(@event.venue_directions.from_markdown_to_html)
+        = raw(@event.venue_address_line_one.from_markdown_to_html)
+        = raw(@event.venue_address_line_two.from_markdown_to_html)
+        = raw(@event.venue_address_city.from_markdown_to_html)
         %br
         .map--overlay{onclick: "style.pointerEvents='none'"}
         :plain
@@ -84,7 +87,7 @@
           <script type="text/javascript">
           (function(){
           function wpgmappity_maps_loaded() {
-          var latlng = new google.maps.LatLng(51.456370, -2.606592);
+          var latlng = new google.maps.LatLng(-33.424453, -70.584774);
           var options = {
            center : latlng,
            mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -97,80 +100,20 @@
            mapTypeControl : false,
            scaleControl : false,
            streetViewControl : false,
-           panControl : false, zoom : 14
+           panControl : false, zoom : 16
           };
           var wpgmappitymap = new google.maps.Map(document.getElementById('wpgmappitymap'), options);
-          var point0 = new google.maps.LatLng(51.4606887,-2.6247733000000153);
+          var point0 = new google.maps.LatLng(-33.424453, -70.584774);
           var marker0= new google.maps.Marker({
-           icon : 'http://labio-wedding.s3.amazonaws.com/assets/church7.png',
+           icon : 'http://labio-wedding.s3.amazonaws.com/assets/hotel39.png',
            position : point0,
            map : wpgmappitymap
            });
           google.maps.event.addListener(marker0,'click',
            function() {
            var infowindow = new google.maps.InfoWindow(
-           {content: '<h3 class="font-book-antiqua">The Mansion House</h3>'});
+           {content: '<h3 class="font-book-antiqua">Ceremonia Los Oleandros</h3>'});
            infowindow.open(wpgmappitymap,marker0);
-           });
-          var point1 = new google.maps.LatLng(51.4527825,-2.62524099999996);
-          var marker1= new google.maps.Marker({
-           icon : 'http://labio-wedding.s3.amazonaws.com/assets/hotel39.png',
-           position : point1,
-           map : wpgmappitymap
-           });
-          google.maps.event.addListener(marker1,'click',
-           function() {
-           var infowindow = new google.maps.InfoWindow(
-           {content: '<h3 class="font-book-antiqua">The Bristol Hotel</h3><a target=\"_blank\" href=\"http://www.doylecollection.com/hotels/the-bristol-hotel\">Go to website</a>'});
-           infowindow.open(wpgmappitymap,marker1);
-           });
-          var point2 = new google.maps.LatLng(51.4488666,-2.587721999999985);
-          var marker2= new google.maps.Marker({
-           icon : 'http://labio-wedding.s3.amazonaws.com/assets/hotel39.png',
-           position : point2,
-           map : wpgmappitymap
-           });
-          google.maps.event.addListener(marker2,'click',
-           function() {
-           var infowindow = new google.maps.InfoWindow(
-           {content: '<h3 class="font-book-antiqua">DoubleTree</h3><a target=\"_blank\" href=\"http://doubletree3.hilton.com/en/index.html\">Go to website</a>'});
-           infowindow.open(wpgmappitymap,marker2);
-           });
-          var point3 = new google.maps.LatLng(51.4559676,-2.5847842000000583);
-          var marker3= new google.maps.Marker({
-           icon : 'http://labio-wedding.s3.amazonaws.com/assets/hotel39.png',
-           position : point3,
-           map : wpgmappitymap
-           });
-          google.maps.event.addListener(marker3,'click',
-           function() {
-           var infowindow = new google.maps.InfoWindow(
-           {content: '<h3 class="font-book-antiqua">Bristol Marriott</h3><a target=\"_blank\" href=\"http://www.marriott.com/hotels/travel/brsdt-bristol-marriott-hotel-city-centre/\">Go to website</a>'});
-           infowindow.open(wpgmappitymap,marker3);
-           });
-          var point4 = new google.maps.LatLng(51.4522431,-2.59696770000005);
-          var marker4= new google.maps.Marker({
-           icon : 'http://labio-wedding.s3.amazonaws.com/assets/hotel39.png',
-           position : point4,
-           map : wpgmappitymap
-           });
-          google.maps.event.addListener(marker4,'click',
-           function() {
-           var infowindow = new google.maps.InfoWindow(
-           {content: '<h3 class="font-book-antiqua">Radisson Blu</h3><a target=\"_blank\" href=\"http://www.radissonblu.co.uk/hotel-bristol\">Go to website</a>'});
-           infowindow.open(wpgmappitymap,marker4);
-           });
-          var point5 = new google.maps.LatLng(51.4597989,-2.586416399999962);
-          var marker5= new google.maps.Marker({
-           icon : 'http://labio-wedding.s3.amazonaws.com/assets/hotel39.png',
-           position : point5,
-           map : wpgmappitymap
-           });
-          google.maps.event.addListener(marker5,'click',
-           function() {
-           var infowindow = new google.maps.InfoWindow(
-           {content: '<h3>Holiday Inn</h3><a target=\"_blank\" href=\"http://www.ihg.com/holidayinn/hotels/gb/en/bristol/brscc/hoteldetail\">Go to website</a>'});
-           infowindow.open(wpgmappitymap,marker5);
            });
           }
           window.onload = function() {
@@ -200,24 +143,23 @@
 
 .row
   .column.small-12.medium-8.medium-offset-2
-    %h5 Photos
+    %h5 Fotos
 
 - if @event.show_photos?(params)
   = render partial: "photos/form"
   = render partial: "photos/index"
   #modalDropImages.reveal-modal{"data-reveal" => "", :style => "display: block;"}
-    %h2.text--salmon Drop images to upload
+    %h2.text--salmon Suelta imágenes aquí para subir
 - else
   .row
     .column.small-12
-      %p We invite you back to this website after the wedding to view and upload photos
+      %p Te invitamos a que vuelvas a este sitio luego de la ceremonia para ver y subir fotos
 
 %br
 
 %footer
   %p
     %small
-      For our techie friends hitched.it is an
+      Para nuestros amigos techie, hitched.it is an
       %a{:href => "http://github.com/adambutler/wedding-on-rails"} open source project
       built on Ruby-on-Rails.
-
